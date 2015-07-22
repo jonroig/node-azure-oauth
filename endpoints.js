@@ -38,7 +38,7 @@ module.exports.configureEndpoints = function (app, passport) {
     });
 
     // mail
-    app.get('/mail', function (req, res, next) {
+    app.get('/mail', function (req, res) {
 
     });
 };
