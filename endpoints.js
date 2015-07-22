@@ -38,8 +38,8 @@ module.exports.configureEndpoints = function (app, passport) {
     });
 
     app.get('/mail', ensureAuthenticated, function (req, res) {
-        console.log('req', req);
-        console.log('req.user._id', req.user._id);
+        // console.log('req', req);
+        // console.log('req.user._id', req.user._id);
         request.get(
             'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
             { Authorization : { 'bearer' : req.user._id },
