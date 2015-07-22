@@ -49,6 +49,7 @@ module.exports.getStrategy = function(config, User) {
             var tokenBinary = new Buffer(tokenBase64, 'base64');
             var tokenAscii = tokenBinary.toString('ascii');
             var tokenObj = JSON.parse(tokenAscii);
+            console.log('tokenObj',tokenObj);
             profile.json = tokenObj;
             profile.email = tokenObj.email;
             profile.displayname = tokenObj.given_name + ' ' + tokenObj.family_name;
