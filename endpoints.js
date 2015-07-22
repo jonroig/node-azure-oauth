@@ -39,19 +39,6 @@ module.exports.configureEndpoints = function (app, passport) {
 
     // mail
     app.get('/mail', function (req, res, next) {
-        request.get(
-            "https://outlook.office365.com/messages",
-            { auth : { 'bearer' : passport.user.getToken('https://outlook.office365.com/').access_token } },
-            function (error, response, body) {
-                if (error) {
-                    next(error);
-                }
-                else {
-                    data = { user: passport.user, msgs: JSON.parse(body)['value'] };
-                    res.write(JSON.stringify(data));
-                    res.end();
-                }
-            }
-        );
+
     });
 };
