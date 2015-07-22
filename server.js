@@ -22,7 +22,7 @@ var passport = require('./passport').getPassport(config, oauth, User);
 var app = express();
 
 // standard express config (including sessions)
-app.set('port', process.env.PORT || 4000);
+app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
