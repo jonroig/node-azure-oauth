@@ -12,6 +12,7 @@ module.exports.getStrategy = function(config, User) {
         // this method is invoked upon auth sequence completion
         //  its your hook to cache the access/refresh tokens, post-process the Azure profile, etc.
         function (accessToken, refreshToken, profile, done) {
+            console.log('profile',profile);
             // here we look in mongo for an existing, matching user
             User.findOne({ email: profile.email }, function(err, user) {
                 if (err) {
@@ -19,7 +20,7 @@ module.exports.getStrategy = function(config, User) {
                 }
                 // if we don't find an existing user, make one
                 if (!user) {
-                    User.create({ tokenObj: profile.tokenObj, email: profile.email, name: profile.displayname, logins: 1 }, function(err, user) {
+                    User.create({ sub: profile.sub, email: profile.email, name: profile.displayname, logins: 1 }, function(err, user) {
                         return done(null, user);
                     });
                 } else {
@@ -52,7 +53,7 @@ module.exports.getStrategy = function(config, User) {
             console.log('tokenObj',tokenObj);
             profile.json = tokenObj;
             profile.email = tokenObj.email;
-            profile.tokenObj = tokenObj;
+            profile.sub = tokenObj.sub;
             profile.displayname = tokenObj.given_name + ' ' + tokenObj.family_name;
             done(null, profile);
         } catch (ex) {
