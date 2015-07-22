@@ -11,6 +11,8 @@ var config = require('./config').settings;
 var db = require('./db');
 var oauth = require('./oauth');
 
+var request = require('request');
+
 // get mongo User model
 var User = db.getUserModel(config);
 
