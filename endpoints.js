@@ -36,9 +36,4 @@ module.exports.configureEndpoints = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
-
-    // mail
-    app.get('/mail', function (req, res) {
-
-    });
 };
