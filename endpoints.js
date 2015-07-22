@@ -40,22 +40,22 @@ module.exports.configureEndpoints = function (app, passport) {
     app.get('/mail', ensureAuthenticated, function (req, res) {
         console.log('req', req);
         console.log('req.user._id', req.user._id);
-        // request.get(
-        //     'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
-        //     { Authorization : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token },
-        //      Accept: 'application/json;odata.metadata=none'
-        //       },
-        //     function (error, response, body) {
-        //         if (error) {
-        //             console.log('error', error);
-        //             next(error);
-        //         }
-        //         else {
-        //             console.log('body', body);
-        //             data = { user: passport.user, msgs: JSON.parse(body)['value'] };
-        //             res.render('mail', { data: data });
-        //         }
-        //     }
-        // );
+        request.get(
+            'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
+            { Authorization : { 'bearer' : req.user._id },
+             Accept: 'application/json;odata.metadata=none'
+              },
+            function (error, response, body) {
+                if (error) {
+                    console.log('error', error);
+                    next(error);
+                }
+                else {
+                    console.log('body', body);
+                    data = { user: passport.user, msgs: JSON.parse(body)['value'] };
+                    res.render('mail', { data: data });
+                }
+            }
+        );
     });
 };
