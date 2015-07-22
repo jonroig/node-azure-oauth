@@ -54,8 +54,8 @@ module.exports.configureEndpoints = function (app, passport) {
                 }
                 else {
                     console.log('body', body);
-                    data = { user: passport.user, msgs: JSON.parse(body)['value'] };
-                    res.render('mail', { data: data });
+                    // data = { user: passport.user, msgs: JSON.parse(body)['value'] };
+                    // res.render('mail', { data: data });
                 }
             }
         );
