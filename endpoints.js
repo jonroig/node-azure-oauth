@@ -36,21 +36,4 @@ module.exports.configureEndpoints = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
-
-    // mail
-    app.get('/mail', function (req, res, next) {
-        request.get(
-            appSettings.apiEndpoints.exchangeBaseUrl + "/messages",
-            { auth : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token } },
-            function (error, response, body) {
-                if (error) {
-                    next(error);
-                }
-                else {
-                    data = { user: passport.user, msgs: JSON.parse(body)['value'] };
-                    res.render('mail', { data: data });
-                }
-            }
-        );
-    });
 };
