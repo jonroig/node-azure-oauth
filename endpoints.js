@@ -36,4 +36,25 @@ module.exports.configureEndpoints = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    app.get('/mail', ensureAuthenticated, function (req, res) {
+        console.log('req', req);
+        // request.get(
+        //     'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
+        //     { Authorization : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token },
+        //      Accept: 'application/json;odata.metadata=none'
+        //       },
+        //     function (error, response, body) {
+        //         if (error) {
+        //             console.log('error', error);
+        //             next(error);
+        //         }
+        //         else {
+        //             console.log('body', body);
+        //             data = { user: passport.user, msgs: JSON.parse(body)['value'] };
+        //             res.render('mail', { data: data });
+        //         }
+        //     }
+        // );
+    });
 };
