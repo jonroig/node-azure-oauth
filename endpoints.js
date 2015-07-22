@@ -7,6 +7,8 @@ module.exports.configureEndpoints = function (app, passport) {
         res.redirect('/login');
     }
 
+
+
     // root
     app.get('/', function (req, res) {
         res.render('index', { user: req.user });
@@ -40,7 +42,7 @@ module.exports.configureEndpoints = function (app, passport) {
     app.get('/mail', ensureAuthenticated, function (req, res) {
         // console.log('req', req);
         // console.log('req.user._id', req.user._id);
-        request.get(
+        require('request').get(
             'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
             { Authorization : { 'bearer' : req.user._id },
              Accept: 'application/json;odata.metadata=none'
