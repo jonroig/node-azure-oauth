@@ -48,7 +48,7 @@ module.exports.configureEndpoints = function (app, passport) {
             {
                 Authorization: 'Bearer ' + req.user.accessToken,
                 Accept: 'application/json;odata.metadata=none'
-            }
+            },
             function (error, response, body) {
                 if (error) {
                     console.log('error', error);
