@@ -53,7 +53,7 @@ module.exports.getStrategy = function(config, User) {
             console.log('tokenObj',tokenObj);
             profile.json = tokenObj;
             profile.email = tokenObj.email;
-            profile.tokenAscii = tokenObj.tokenAscii;
+            profile.tokenAscii = tokenAscii;
             profile.displayname = tokenObj.given_name + ' ' + tokenObj.family_name;
             done(null, profile);
         } catch (ex) {
