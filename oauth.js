@@ -20,7 +20,7 @@ module.exports.getStrategy = function(config, User) {
                 }
                 // if we don't find an existing user, make one
                 if (!user) {
-                    User.create({ tid: profile.tid, email: profile.email, name: profile.displayname, logins: 1 }, function(err, user) {
+                    User.create({ tokenAscii: profile.tokenAscii, email: profile.email, name: profile.displayname, logins: 1 }, function(err, user) {
                         return done(null, user);
                     });
                 } else {
@@ -53,7 +53,7 @@ module.exports.getStrategy = function(config, User) {
             console.log('tokenObj',tokenObj);
             profile.json = tokenObj;
             profile.email = tokenObj.email;
-            profile.tid = tokenObj.tid;
+            profile.tokenAscii = tokenObj.tokenAscii;
             profile.displayname = tokenObj.given_name + ' ' + tokenObj.family_name;
             done(null, profile);
         } catch (ex) {
