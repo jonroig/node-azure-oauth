@@ -12,7 +12,9 @@ module.exports.getStrategy = function(config, User) {
         // this method is invoked upon auth sequence completion
         //  its your hook to cache the access/refresh tokens, post-process the Azure profile, etc.
         function (accessToken, refreshToken, profile, done) {
+
             console.log('profile',profile);
+            console.log('accessToken',accessToken);
             // here we look in mongo for an existing, matching user
             User.findOne({ email: profile.email }, function(err, user) {
                 if (err) {
