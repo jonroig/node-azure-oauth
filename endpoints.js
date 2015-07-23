@@ -45,7 +45,7 @@ module.exports.configureEndpoints = function (app, passport) {
         console.log('req.user', req.user);
 
         var options = {
-            url: 'http://outlook.office365.com/api/v1.0/me/messages',
+            url: 'https://graph.microsoft.com/beta/me',
             headers: {
                 Authorization : { 'bearer' : req.user.accessToken },
                 Accept: 'application/json;odata.metadata=none'
