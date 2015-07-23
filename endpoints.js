@@ -28,7 +28,7 @@ module.exports.configureEndpoints = function (app, passport) {
     app.get('/auth/waad', passport.authenticate('oauth2'));
 
     // callback from Azure to complete auth sequence
-    app.get('/auth/waad/callback', q.authenticate('oauth2', { failureRedirect: '/login' }),
+    app.get('/auth/waad/callback', passport.authenticate('oauth2', { failureRedirect: '/login' }),
       function (req, res) {
           res.redirect('/');
       });
@@ -40,9 +40,8 @@ module.exports.configureEndpoints = function (app, passport) {
     });
 
     app.get('/mail', ensureAuthenticated, function (req, res) {
-
-        console.log('TOKEN', passport.user.getToken('https://outlook.office365.com'));
         // console.log('req', req);
+        console.log('TOKEN', passport.user.getToken('https://outlook.office365.com');
         // console.log('req.user', req.user);
         // require('request').get(
         //     'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
