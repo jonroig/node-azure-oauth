@@ -47,7 +47,6 @@ module.exports.configureEndpoints = function (app, passport) {
         var options = {
             url: 'https://graph.microsoft.com/beta/me',
             headers: {
-                content-type: 'application/json;charset=utf-8;odata=minimalmetadata',
                 Bearer : req.user.accessToken,
             }
 
@@ -60,6 +59,7 @@ module.exports.configureEndpoints = function (app, passport) {
                     next(error);
                 }
                 else {
+                    console.log('response',response);
                     console.log('body', body);
                     // data = { user: passport.user, msgs: JSON.parse(body)['value'] };
                     // res.render('mail', { data: data });
