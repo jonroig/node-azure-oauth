@@ -47,7 +47,7 @@ module.exports.configureEndpoints = function (app, passport) {
         var options = {
             url: 'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
             headers: {
-                Authorization: 'Bearer ' + req.user.accessToken,
+                Authorization : { 'bearer' : req.user.accessToken },
                 Accept: 'application/json;odata.metadata=none'
             }
 
