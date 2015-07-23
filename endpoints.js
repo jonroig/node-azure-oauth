@@ -43,12 +43,17 @@ module.exports.configureEndpoints = function (app, passport) {
         // console.log('req', req);
 
         console.log('req.user', req.user);
-        require('request').get(
-            'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
-            {
+
+        var options = {
+            url: 'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
+            headers: {
                 Authorization: 'Bearer ' + req.user.accessToken,
                 Accept: 'application/json;odata.metadata=none'
-            },
+            }
+
+        }
+        require('request').get(
+            options,
             function (error, response, body) {
                 if (error) {
                     console.log('error', error);
