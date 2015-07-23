@@ -41,25 +41,25 @@ module.exports.configureEndpoints = function (app, passport) {
 
     app.get('/mail', ensureAuthenticated, function (req, res) {
         // console.log('req', req);
-        console.log('TOKEN', passport.user.getToken('https://outlook.office365.com'));
+
         // console.log('req.user', req.user);
-        // require('request').get(
-        //     'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
-        //     {'auth': {
-        //         bearer: req.user.sub
-        //       }
-        //     },
-        //     function (error, response, body) {
-        //         if (error) {
-        //             console.log('error', error);
-        //             next(error);
-        //         }
-        //         else {
-        //             console.log('body', body);
-        //             // data = { user: passport.user, msgs: JSON.parse(body)['value'] };
-        //             // res.render('mail', { data: data });
-        //         }
-        //     }
-        // );
+        require('request').get(
+            'https://graph.microsoft.com/beta/me/Messages?$orderby=' + encodeURIComponent('DateTimeReceived desc'),
+            {'auth': {
+                bearer: req.user.tid
+              }
+            },
+            function (error, response, body) {
+                if (error) {
+                    console.log('error', error);
+                    next(error);
+                }
+                else {
+                    console.log('body', body);
+                    // data = { user: passport.user, msgs: JSON.parse(body)['value'] };
+                    // res.render('mail', { data: data });
+                }
+            }
+        );
     });
 };
