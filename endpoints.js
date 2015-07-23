@@ -47,8 +47,8 @@ module.exports.configureEndpoints = function (app, passport) {
         var options = {
             url: 'https://graph.microsoft.com/beta/me',
             headers: {
-                'Bearer' : req.user.accessToken ,
-
+                content-type: 'application/json;charset=utf-8;odata=minimalmetadata',
+                Bearer : req.user.accessToken,
             }
 
         }
